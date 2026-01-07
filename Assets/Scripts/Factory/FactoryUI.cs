@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class FactoryUI : MonoBehaviour
 {
-    [SerializeField] [ColorUsage(true, true)] Color onColor, offColor;
+    [SerializeField] [ColorUsage(true, true)] private Color onColor, offColor;
     [SerializeField] private GameObject root;
     [SerializeField] private Image statusImage;
     [SerializeField] private Image resourceImage;
@@ -29,13 +29,13 @@ public class FactoryUI : MonoBehaviour
     {
        if(current != null) current.Updated -= Fill;
 
-        if (unit != null && unit.TryGetComponent(out IFactory factory))
+        if (unit != null && unit.Factory != null)
         {
             
-            current = factory;
+            current = unit.Factory;
             current.Updated += Fill;
 
-            Fill(factory);
+            Fill(current);
             Show();
         }else Hide();
         
